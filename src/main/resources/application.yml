@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1/art?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+  resources:
+    static-locations: classpath:/
+debug: true

@@ -1,0 +1,223 @@
+<!doctype HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <link rel="stylesheet" href="/static/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-deep_purple.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link href="/static/fonts/fontello/css/fontello.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/css/bootstrap-offset-right.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/my.css">
+
+    <title>Arty登录界面</title>
+
+
+</head>
+
+<body>
+<div class="container">
+    <div class="center-block">
+        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-12 col-xs-12 no-padding" style="z-index:1">
+            <!-- Slider -->
+
+            <div class="mlt-carousel">
+                <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img class="img-responsive center-block" src="/static/img/step1.png" alt="step1">
+                            <div class="item-content">
+                                <h3>一行没有意义的文字</h3>
+                                <p>这一行任然没有意义</p>
+                                <p>依然没有意义</p>
+                                <p>好吧全部没有意义</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive center-block" src="/static/img/step2.png" alt="step2">
+                            <div class="item-content">
+                                <h3>武汉很热</h3>
+                                <p>武汉很热+1</p>
+                                <p>武汉很热+2</p>
+                                <p>武汉很热+3</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive center-block" src="/static/img/step3.png" alt="step3">
+                            <div class="item-content">
+                                <h3> 项目没有搞完</h3>
+                                <p>项目没有搞完+1</p>
+                                <p>项目没有搞完+2</p>
+                                <p>项目没有搞完+3</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                </div>
+                <!--mlt-carousel-->
+            </div>
+            <!-- Slider -->
+        </div>
+        <!-- Login -->
+
+        <div class="col-lg-6 col-lg-offset-right-1 col-md-6 col-md-offset-right-1 col-sm-12 col-xs-12 no-padding">
+            <div class="mlt-content">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#register" data-toggle="tab">注册</a></li>
+                    <li><a href="#login" data-toggle="tab">登录</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="register">
+                        <!--register form-->
+
+                        <form data-feedback='{"success": "fa-check", "error": "fa-times"}' th:action="@{/getRegister}" method="post" th:object="${registerform}">
+                            <div class="col-lg-10 col-lg-offset-1 col-lg-offset-right-1 col-md-10 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
+
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-group has-feedback">
+                                    <input type="text" name="fname" id="fname" class="mdl-textfield__input" th:field="*{username}"/>
+                                    <label class="mdl-textfield__label " for="fname" >名字</label>
+                                    <span class="form-control-feedback" aria-hidden="true" id="fname1"></span>
+                                </div>
+                                <!--
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input " type="text" id="fullName ">
+                                    <label class="mdl-textfield__label " for="fullName ">Full Name</label>
+                                </div>-->
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                                    <input class="mdl-textfield__input " type="text" id="emailAddress " th:field="*{email}">
+                                    <label class="mdl-textfield__label " for="emailAddress ">邮箱地址</label>
+                                </div>
+
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                                    <input class="mdl-textfield__input " type="text" id="mobileNumber " th:field="*{cellphone}">
+                                    <label class="mdl-textfield__label " for="mobileNumber ">手机号码</label>
+                                    <span class="mdl-textfield__error ">输入不是手机号</span>
+                                </div>
+
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                                    <input class="mdl-textfield__input " type="text" id="SetPassword " th:field="*{password}">
+                                    <label class="mdl-textfield__label " for="SetPassword ">密码</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                                    <input class="mdl-textfield__input " type="password" id="ConfirmPassword " th:field="*{pwd_cfm}">
+                                    <label class="mdl-textfield__label " for="ConfirmPassword ">确认密码</label>
+                                </div>
+
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="termsFlag">
+                                    <input type="checkbox" id="termsFlag" class="mdl-checkbox__input " th:checked="${registerform.terms}">
+                                    <span class="mdl-checkbox__label ">我同意<a href="# ">使用规则</a> 以及 <a href="# ">隐私协议</a></span>
+                                </label>
+
+                                <button class="btn lt-register-btn ">提交注册<i
+                                        class="icon-right pull-right "></i></button>
+                            </div>
+                        </form>
+                        <!--register form-->
+                    </div>
+                    <div class="tab-pane fade" id="login">
+                        <!--login form-->
+                        <form th:object="${userform}" th:method="POST" th:action="@{/getLogin}">
+
+                            <div class="col-lg-10 col-lg-offset-1 col-lg-offset-right-1 col-md-10 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="login_name" th:field="*{username}">
+                                    <label class="mdl-textfield__label" for="login_name">邮箱地址/用户名/手机号</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-10 col-lg-offset-1 col-lg-offset-right-1 col-md-10 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="password" id="password" th:field="*{password}">
+                                    <label class="mdl-textfield__label" for="password">用户密码</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-10 col-lg-offset-1 col-lg-offset-right-1 col-md-10 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
+                                <div class="row">
+                                    <br>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="rememberPass">
+                                            <input type="checkbox" id="rememberPass" class="mdl-switch__input">
+                                            <span class="mdl-switch__label">记住我</span>
+                                        </label>
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style=" text-align:right;">
+                                        <a href="#">忘记密码</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-10 col-lg-offset-1 col-lg-offset-right-1 col-md-10 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
+                                <button class="btn lt-register-btn">登录<i class="icon-right " ></i></button>
+                            </div>
+                        </form>
+                        <!--login form-->
+                    </div>
+                </div>
+            </div>
+            <!--Login-->
+        </div>
+        <!--center-block-->
+    </div>
+    <!--container-->
+</div>
+
+
+<script src="/static/node_modules/jquery/dist/jquery.min.js "></script>
+<script src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js "></script>
+<script src="/static/libs/mdl/material.min.js "></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js "></script>
+<script src="/static/js/my.js"></script>
+
+<!--<script>-->
+<!--//Google analytics.-->
+<!--(function(i, s, o, g, r, a, m) {-->
+<!--i['GoogleAnalyticsObject'] = r;-->
+<!--i[r] = i[r] || function() {-->
+<!--(i[r].q = i[r].q || []).push(arguments)-->
+<!--}, i[r].l = 1 * new Date();-->
+<!--a = s.createElement(o),-->
+<!--m = s.getElementsByTagName(o)[0];-->
+<!--a.async = 1;-->
+<!--a.src = g;-->
+<!--m.parentNode.insertBefore(a, m)-->
+<!--})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');-->
+
+<!--ga('create', 'UA-79865537-1', 'auto');-->
+<!--ga('send', 'pageview');-->
+<!--</script>-->
+
+<!--<script>-->
+<!--//Form validation.-->
+<!--$('form').validate({-->
+<!--rules: {-->
+<!--fname: {-->
+<!--minlength: 3,-->
+<!--maxlength: 15,-->
+<!--}-->
+<!--},-->
+<!--errorPlacement: function(error, element) {},-->
+<!--highlight: function(element) {-->
+<!--var id_attr = "#" + $(element).attr("id") + "1";-->
+<!--$(element).closest('.form-group').removeClass('has-success').addClass('has-error');-->
+<!--$(id_attr).removeClass('icon-ok-circled2').addClass('icon-cancel-circled2');-->
+<!--},-->
+<!--unhighlight: function(element) {-->
+<!--var id_attr = "#" + $(element).attr("id") + "1";-->
+<!--$(element).closest('.form-group').removeClass('has-error').addClass('has-success');-->
+<!--$(id_attr).removeClass('icon-cancel-circled2').addClass('icon-ok-circled2');-->
+<!--},-->
+<!--});-->
+<!--</script>-->
+
+</body>
+
+</html>
