@@ -1,6 +1,8 @@
 spring:
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: update
   datasource:
     url: jdbc:mysql://127.0.0.1/art?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root

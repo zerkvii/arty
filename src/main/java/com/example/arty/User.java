@@ -2,14 +2,18 @@ package com.example.arty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "userTable")
-public class User extends BaseModel {
+@Data
+class User extends BaseModel {
     @Column(unique = true, nullable = false)
     private String username;
 
@@ -28,5 +32,8 @@ public class User extends BaseModel {
 
     @JsonIgnore
     private String last_ip;
+
+    @JsonIgnore
+    private String register_ip;
 
 }
