@@ -1,9 +1,9 @@
-package com.example.arty;
+package com.example.arty.Utils.Form;
 
 import lombok.Data;
 
 @Data
-class UserForm {
+public class UserForm {
 
     private String username;
 

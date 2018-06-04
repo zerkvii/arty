@@ -1,34 +1,48 @@
-$('form').validate({
-    rules: {
-        fname: {
-            minlength: 3,
-            maxlength: 15,
-        }
-    },
-    errorPlacement: function(error, element) {},
-    highlight: function(element) {
-        var id_attr = "#" + $(element).attr("id") + "1";
-        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-        $(id_attr).removeClass('icon-ok-circled2').addClass('icon-cancel-circled2');
-    },
-    unhighlight: function(element) {
-        var id_attr = "#" + $(element).attr("id") + "1";
-        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-        $(id_attr).removeClass('icon-cancel-circled2').addClass('icon-ok-circled2');
-    },
+$.validator.setDefaults({
+    submitHandler: function() {
+        alert("提交事件!");
+    }
 });
-
-(function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-ga('create', 'UA-79865537-1', 'auto');
-ga('send', 'pageview');
+$().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+    $("#register").validate({
+        rules: {
+            username: {
+                required: true,
+                minlength: 2
+            },
+            password: {
+                required: true,
+                minlength: 5
+            },
+            confirm_password: {
+                required: true,
+                minlength: 5,
+                equalTo: "#password"
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            agree: "required"
+        },
+        messages: {
+            username: {
+                required: "请输入用户名",
+                minlength: "用户名必需由两个字母组成"
+            },
+            password: {
+                required: "请输入密码",
+                minlength: "密码长度不能小于 5 个字母"
+            },
+            confirm_password: {
+                required: "请输入密码",
+                minlength: "密码长度不能小于 5 个字母",
+                equalTo: "两次密码输入不一致"
+            },
+            email: "请输入一个正确的邮箱",
+            agree: "请接受我们的声明",
+            topic: "请选择两个主题"
+        }
+    })
+});

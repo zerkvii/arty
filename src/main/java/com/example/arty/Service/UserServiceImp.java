@@ -1,5 +1,9 @@
-package com.example.arty;
+package com.example.arty.Service;
 
+import com.example.arty.DAO.UserRepository;
+import com.example.arty.Entity.User;
+import com.example.arty.Utils.Form.RegisterForm;
+import com.example.arty.Utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +23,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void createUserAccount(RegisterForm registerForm,String ipadr) {
+    public void createUserAccount(RegisterForm registerForm, String ipadr) {
         final Utils ut=new Utils();
         final User user=new User();
         user.setUsername(registerForm.getUsername());
@@ -28,6 +32,9 @@ public class UserServiceImp implements UserService {
         user.setPassword(registerForm.getPassword());
         user.setRegister_date(ut.getCurrentTime());
         user.setRegister_ip(ipadr);
+        user.setLast_ip(ipadr);
         userRepository.save(user);
     }
+
+
 }

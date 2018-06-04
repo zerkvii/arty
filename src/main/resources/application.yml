@@ -3,6 +3,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
     url: jdbc:mysql://127.0.0.1/art?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
@@ -10,3 +13,4 @@ spring:
   resources:
     static-locations: classpath:/
 debug: true
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect

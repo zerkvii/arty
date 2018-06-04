@@ -1,10 +1,9 @@
-package com.example.arty;
+package com.example.arty.Entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.annotation.Inherited;
 import java.time.ZonedDateTime;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 

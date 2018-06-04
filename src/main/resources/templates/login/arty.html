@@ -1,9 +1,7 @@
-<!doctype HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE html >
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width,initial-scale=1" name="viewport">
     <link rel="stylesheet" href="/static/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-deep_purple.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
@@ -11,18 +9,13 @@
     <link rel="stylesheet" href="/static/css/bootstrap-offset-right.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/my.css">
-
-    <title>Arty登录界面</title>
-
-
+    <title>arty</title>
 </head>
-
 <body>
 <div class="container">
     <div class="center-block">
         <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-12 col-xs-12 no-padding" style="z-index:1">
             <!-- Slider -->
-
             <div class="mlt-carousel">
                 <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
@@ -77,46 +70,45 @@
                     <div class="tab-pane fade in active" id="register">
                         <!--register form-->
 
-                        <form data-feedback='{"success": "fa-check", "error": "fa-times"}' th:action="@{/getRegister}" method="post" th:object="${registerform}">
+                        <form class="loginform100" th:action="@{/getRegister}" method="post" th:object="${registerform}">
                             <div class="col-lg-10 col-lg-offset-1 col-lg-offset-right-1 col-md-10 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-group has-feedback">
-                                    <input type="text" name="fname" id="fname" class="mdl-textfield__input" th:field="*{username}"/>
+                                    <input type="text" name="fname" id="fname" class="mdl-textfield__input" th:field="*{username}" pattern="[A-Za-z0-9_]{2,30}"/>
                                     <label class="mdl-textfield__label " for="fname" >名字</label>
-                                    <span class="form-control-feedback" aria-hidden="true" id="fname1"></span>
+                                    <span class="mdl-textfield__error ">请输入合法用户名</span>
+
                                 </div>
-                                <!--
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input " type="text" id="fullName ">
-                                    <label class="mdl-textfield__label " for="fullName ">Full Name</label>
-                                </div>-->
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-                                    <input class="mdl-textfield__input " type="text" id="emailAddress " th:field="*{email}">
-                                    <label class="mdl-textfield__label " for="emailAddress ">邮箱地址</label>
+                                    <input class="mdl-textfield__input " type="text" id="emailAddress" name="emailAddress" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}">
+                                    <label class="mdl-textfield__label " for="emailAddress">邮箱地址</label>
+                                    <span class="mdl-textfield__error ">邮箱不合法</span>
                                 </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-                                    <input class="mdl-textfield__input " type="text" id="mobileNumber " th:field="*{cellphone}">
+                                    <input class="mdl-textfield__input " type="text" id="mobileNumber " pattern="[0-9]{11}" th:field="*{cellphone}">
                                     <label class="mdl-textfield__label " for="mobileNumber ">手机号码</label>
                                     <span class="mdl-textfield__error ">输入不是手机号</span>
                                 </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-                                    <input class="mdl-textfield__input " type="text" id="SetPassword " th:field="*{password}">
-                                    <label class="mdl-textfield__label " for="SetPassword ">密码</label>
+                                    <input class="mdl-textfield__input " type="text" id="SetPassword" name="SetPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" th:field="*{password}">
+                                    <label class="mdl-textfield__label " for="SetPassword">密码</label>
+                                    <span class="mdl-textfield__error ">至少一个大写字母一个小写字母且长度大于六</span>
+
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-                                    <input class="mdl-textfield__input " type="password" id="ConfirmPassword " th:field="*{pwd_cfm}">
-                                    <label class="mdl-textfield__label " for="ConfirmPassword ">确认密码</label>
+                                    <input class="mdl-textfield__input " type="password" id="pwd_cfm" name="pwd_cfm" th:field="*{pwd_cfm}">
+                                    <label class="mdl-textfield__label " for="pwd_cfm">确认密码</label>
+
                                 </div>
 
                                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="termsFlag">
-                                    <input type="checkbox" id="termsFlag" class="mdl-checkbox__input " th:field="${registerform.terms}">
+                                    <input type="checkbox" required="required" id="termsFlag" class="mdl-checkbox__input ">
                                     <span class="mdl-checkbox__label ">我同意<a href="# ">使用规则</a> 以及 <a href="# ">隐私协议</a></span>
                                 </label>
+                                <input class="btn lt-register-btn icon-right "  type="submit" value="提交注册">
 
-                                <button class="btn lt-register-btn ">提交注册<i
-                                        class="icon-right pull-right "></i></button>
                             </div>
                         </form>
                         <!--register form-->
@@ -169,55 +161,8 @@
     </div>
     <!--container-->
 </div>
-
-
 <script src="/static/node_modules/jquery/dist/jquery.min.js "></script>
 <script src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js "></script>
-<script src="/static/libs/mdl/material.min.js "></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js "></script>
-<script src="/static/js/my.js"></script>
-
-<!--<script>-->
-<!--//Google analytics.-->
-<!--(function(i, s, o, g, r, a, m) {-->
-<!--i['GoogleAnalyticsObject'] = r;-->
-<!--i[r] = i[r] || function() {-->
-<!--(i[r].q = i[r].q || []).push(arguments)-->
-<!--}, i[r].l = 1 * new Date();-->
-<!--a = s.createElement(o),-->
-<!--m = s.getElementsByTagName(o)[0];-->
-<!--a.async = 1;-->
-<!--a.src = g;-->
-<!--m.parentNode.insertBefore(a, m)-->
-<!--})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');-->
-
-<!--ga('create', 'UA-79865537-1', 'auto');-->
-<!--ga('send', 'pageview');-->
-<!--</script>-->
-
-<!--<script>-->
-<!--//Form validation.-->
-<!--$('form').validate({-->
-<!--rules: {-->
-<!--fname: {-->
-<!--minlength: 3,-->
-<!--maxlength: 15,-->
-<!--}-->
-<!--},-->
-<!--errorPlacement: function(error, element) {},-->
-<!--highlight: function(element) {-->
-<!--var id_attr = "#" + $(element).attr("id") + "1";-->
-<!--$(element).closest('.form-group').removeClass('has-success').addClass('has-error');-->
-<!--$(id_attr).removeClass('icon-ok-circled2').addClass('icon-cancel-circled2');-->
-<!--},-->
-<!--unhighlight: function(element) {-->
-<!--var id_attr = "#" + $(element).attr("id") + "1";-->
-<!--$(element).closest('.form-group').removeClass('has-error').addClass('has-success');-->
-<!--$(id_attr).removeClass('icon-cancel-circled2').addClass('icon-ok-circled2');-->
-<!--},-->
-<!--});-->
-<!--</script>-->
-
+<script src="/static/libs/mdl/material.min.js"></script>
 </body>
-
 </html>

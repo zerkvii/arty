@@ -1,4 +1,4 @@
-package com.example.arty;
+package com.example.arty.Utils;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

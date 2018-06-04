@@ -50,3 +50,7 @@
     color: #b0b3b4;
     font-size: 14px;
 }
+
+#cfm_pwd{
+    visibility: hidden;
+}

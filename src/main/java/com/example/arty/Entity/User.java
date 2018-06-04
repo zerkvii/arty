@@ -1,4 +1,4 @@
-package com.example.arty;
+package com.example.arty.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,9 +11,9 @@ import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "userTable")
+@Table(name = "users")
 @Data
-class User extends BaseModel {
+public class User extends BaseModel {
     @Column(unique = true, nullable = false)
     private String username;
 

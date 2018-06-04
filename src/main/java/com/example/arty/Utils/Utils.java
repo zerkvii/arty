@@ -1,11 +1,11 @@
-package com.example.arty;
+package com.example.arty.Utils;
 
 import org.joda.time.DateTime;
 
 import java.util.Locale;
 
-class Utils {
-    String getCurrentTime(){
+public class Utils {
+    public String getCurrentTime(){
         return new DateTime().toString("yyyy-MM-dd HH:mm:ss",Locale.CHINESE);
     }
 }

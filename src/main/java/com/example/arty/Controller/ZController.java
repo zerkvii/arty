@@ -1,7 +1,10 @@
-package com.example.arty;
+package com.example.arty.Controller;
 
+import com.example.arty.DAO.UserRepository;
+import com.example.arty.Service.UserServiceImp;
+import com.example.arty.Utils.Form.RegisterForm;
+import com.example.arty.Utils.Form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +28,7 @@ public class ZController {
         model.addAttribute("userform",new UserForm());
         model.addAttribute("registerform",new RegisterForm());
         System.out.println("ok");
-        return "login/index";
+        return "login/arty";
     }
 
     @RequestMapping(value = "/getLogin",method = RequestMethod.POST)
@@ -39,7 +42,6 @@ public class ZController {
         System.out.println(register.getCellphone());
         String ipadr=request.getRemoteAddr();
         System.out.println(ipadr);
-        if(register.getTerms())System.out.println("true");
         userService.createUserAccount(register,ipadr);
         return "login/home";
     }
