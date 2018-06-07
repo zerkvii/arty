@@ -9,6 +9,66 @@
     <link rel="stylesheet" href="/static/css/bootstrap-offset-right.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/my.css">
+    <script>
+        function checkregister() {
+            var pwd = document.getElementById("SetPassword").value;
+            var pwd_cfm = document.getElementById("pwd_cfm").value;
+            var reg_name = document.getElementById("registername").value;
+            var reg_email = document.getElementById("emailAd").value;
+            var reg_cellphone = document.getElementById("mobileNumber").value;
+
+            var regx_email = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+            var regx_cellphone = new RegExp("^1[345789]\\d{9}$");
+            var regx_pwd = new RegExp("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$");
+            var cnt=0;
+            if (reg_name.trim().length < 1) {
+                var inf1 = document.getElementById("userspan");
+                inf1.style.visibility = "visible";
+
+            }else {
+                var inf1 = document.getElementById("userspan");
+                inf1.style.visibility = "hidden";
+                cnt=cnt+1;
+            }
+
+            if (!regx_email.test(reg_email.trim())) {
+                var inf2 = document.getElementById("emailspan");
+                inf2.style.visibility = "visible";
+
+            }else {
+                var inf2 = document.getElementById("emailspan");
+                inf2.style.visibility = "hidden";
+                cnt=cnt+1;
+            }
+            if (!regx_cellphone.test(reg_cellphone)) {
+                var inf3 = document.getElementById("cellphonespan");
+                inf3.style.visibility = "visible";
+            }else{
+                var inf3 = document.getElementById("cellphonespan");
+                inf3.style.visibility = "hidden";
+                cnt=cnt+1;
+            }
+            if (!regx_pwd.test(pwd)) {
+                var inf4 = document.getElementById("pwdspan");
+                inf4.style.visibility = "visible";
+            }else{
+                var inf4 = document.getElementById("pwdspan");
+                inf4.style.visibility = "hidden";
+                cnt=cnt+1;
+            }
+            if (pwd_cfm.trim() != pwd.trim()) {
+                var inf5 = document.getElementById("cfmspan");
+                inf5.style.visibility = "visible";
+            }else{
+                var inf5 = document.getElementById("cfmspan");
+                inf5.style.visibility = "hidden";
+                cnt=cnt+1;
+            }
+            if(cnt==5)
+                return true;
+            else return false;
+        }
+    </script>
     <title>arty</title>
 </head>
 <body>
@@ -70,37 +130,38 @@
                     <div class="tab-pane fade in active" id="register">
                         <!--register form-->
 
-                        <form class="loginform100" th:action="@{/getRegister}" method="post" th:object="${registerform}">
+                        <form name="regform" th:action="@{/getRegister}" onsubmit="return checkregister()" method="post" th:object="${registerform}">
                             <div class="col-lg-10 col-lg-offset-1 col-lg-offset-right-1 col-md-10 col-md-offset-1 col-md-offset-right-1 col-sm-12 col-xs-12 pull-right ">
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-group has-feedback">
-                                    <input type="text" name="fname" id="fname" class="mdl-textfield__input" th:field="*{username}" pattern="[A-Za-z0-9_]{2,30}"/>
-                                    <label class="mdl-textfield__label " for="fname" >名字</label>
-                                    <span class="mdl-textfield__error ">请输入合法用户名</span>
+                                    <input type="text" name="registername" id="registername" class="mdl-textfield__input" th:field="*{username}" />
+                                    <label class="mdl-textfield__label " for="registername" >名字</label>
+                                    <span id="userspan"  class="mdl-textfield__error ">用户名非法</span>
 
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-                                    <input class="mdl-textfield__input " type="text" id="emailAddress" name="emailAddress" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}">
-                                    <label class="mdl-textfield__label " for="emailAddress">邮箱地址</label>
-                                    <span class="mdl-textfield__error ">邮箱不合法</span>
+                                    <input class="mdl-textfield__input " type="text" id="emailAd" name="emailAd" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}">
+                                    <label class="mdl-textfield__label " for="emailAd">邮箱地址</label>
+                                    <span id="emailspan" class="mdl-textfield__error ">邮箱不合法</span>
                                 </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-                                    <input class="mdl-textfield__input " type="text" id="mobileNumber " pattern="[0-9]{11}" th:field="*{cellphone}">
-                                    <label class="mdl-textfield__label " for="mobileNumber ">手机号码</label>
-                                    <span class="mdl-textfield__error ">输入不是手机号</span>
+                                    <input class="mdl-textfield__input " type="text" id="mobileNumber" pattern="[0-9]{11}" th:field="*{cellphone}">
+                                    <label class="mdl-textfield__label " for="mobileNumber">手机号码</label>
+                                    <span id="cellphonespan" class="mdl-textfield__error ">输入不是手机号</span>
                                 </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
-                                    <input class="mdl-textfield__input " type="text" id="SetPassword" name="SetPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" th:field="*{password}">
+                                    <input class="mdl-textfield__input " type="text" id="SetPassword" name="SetPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$" th:field="*{password}">
                                     <label class="mdl-textfield__label " for="SetPassword">密码</label>
-                                    <span class="mdl-textfield__error ">至少一个大写字母一个小写字母且长度大于六</span>
+                                    <span id="pwdspan" class="mdl-textfield__error ">至少一个大写字母一个小写字母且长度大于六</span>
 
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
                                     <input class="mdl-textfield__input " type="password" id="pwd_cfm" name="pwd_cfm" th:field="*{pwd_cfm}">
                                     <label class="mdl-textfield__label " for="pwd_cfm">确认密码</label>
-
+                                    <span id="cfmspan" class="mdl-textfield__error ">密码不匹配</span>
+                                    <span id="cfmspan" class="mdl-textfield__error ">用户存在</span>
                                 </div>
 
                                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="termsFlag">
@@ -164,5 +225,6 @@
 <script src="/static/node_modules/jquery/dist/jquery.min.js "></script>
 <script src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js "></script>
 <script src="/static/libs/mdl/material.min.js"></script>
+<script src="/static/js/my.js"></script>
 </body>
 </html>

@@ -5,15 +5,16 @@ import com.example.arty.Utils.validate.ValidEmail;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class RegisterForm {
-
-    @NotBlank(message = "用户名非空")
+    @NotNull
+    @NotEmpty(message = "输入用户名")
     private String username;
     @ValidEmail(message = "邮箱需要合法")
     private String email;
-
 
     private String cellphone;
     private String password;

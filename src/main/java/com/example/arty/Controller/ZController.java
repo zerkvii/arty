@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class ZController {
@@ -24,7 +25,7 @@ public class ZController {
     }
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String getIndex(Model model) {
+    public String getIndex(Model model,String info) {
         model.addAttribute("userform",new UserForm());
         model.addAttribute("registerform",new RegisterForm());
         System.out.println("ok");
@@ -38,11 +39,15 @@ public class ZController {
     }
 
     @RequestMapping(value = "/getRegister",method = RequestMethod.POST)
-    public String postUser(RegisterForm register, HttpServletRequest request){
+    public String postUser( final RegisterForm register, HttpServletRequest request){
         System.out.println(register.getCellphone());
         String ipadr=request.getRemoteAddr();
         System.out.println(ipadr);
-        userService.createUserAccount(register,ipadr);
-        return "login/home";
+        if(userService.isExist(register.getUsername(),register.getEmail(),register.getEmail())) {
+            userService.createUserAccount(register, ipadr);
+            String info="error";
+            Model model = null;
+            return getIndex(model,info);
+        }else return
     }
 }
